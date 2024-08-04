@@ -1,0 +1,13 @@
+﻿.table-header {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.table-header.sortable {
+    cursor: pointer;
+}
+
+.title {
+    padding-right: 0;
+}

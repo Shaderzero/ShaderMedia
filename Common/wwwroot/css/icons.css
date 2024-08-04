@@ -1,0 +1,75 @@
+.mic-on-icon {
+    display: inline-block;
+    -webkit-mask: url('../icons/mic.svg') no-repeat 50% 50%;
+    mask: url('../icons/mic.svg') no-repeat 50% 50%;
+    mask-size: cover;
+}
+
+.mic-off-icon {
+    display: inline-block;
+    -webkit-mask: url('../icons/mic_off.svg') no-repeat 50% 50%;
+    mask: url('../icons/mic_off.svg') no-repeat 50% 50%;
+    mask-size: cover;
+}
+
+.speak-on-icon {
+    display: inline-block;
+    -webkit-mask: url('../icons/speak_on.svg') no-repeat 50% 50%;
+    mask: url('../icons/speak_on.svg') no-repeat 50% 50%;
+    mask-size: cover;
+}
+
+.speak-off-icon {
+    display: inline-block;
+    -webkit-mask: url('../icons/speak_off.svg') no-repeat 50% 50%;
+    mask: url('../icons/speak_off.svg') no-repeat 50% 50%;
+    mask-size: cover;
+}
+
+.bluetooth-on-icon {
+    display: inline-block;
+    -webkit-mask: url('../icons/bluetooth.svg') no-repeat 50% 50%;
+    mask: url('../icons/bluetooth.svg') no-repeat 50% 50%;
+    mask-size: cover;
+}
+
+.bluetooth-off-icon {
+    display: inline-block;
+    -webkit-mask: url('../icons/bluetooth_off.svg') no-repeat 50% 50%;
+    mask: url('../icons/bluetooth_off.svg') no-repeat 50% 50%;
+    mask-size: cover;
+}
+
+.loading-icon {
+    display: inline-block;
+    -webkit-mask: url('../icons/loading.svg') no-repeat 50% 50%;
+    mask: url('../icons/loading.svg') no-repeat 50% 50%;
+    mask-size: cover;
+}
+
+.call-icon {
+    display: inline-block;
+    -webkit-mask: url('../icons/call.svg') no-repeat 50% 50%;
+    mask: url('../icons/call.svg') no-repeat 50% 50%;
+    mask-size: cover;
+}
+
+.call-end-icon {
+    display: inline-block;
+    -webkit-mask: url('../icons/call_end.svg') no-repeat 50% 50%;
+    mask: url('../icons/call_end.svg') no-repeat 50% 50%;
+    mask-size: cover;
+}
+
+.call-connection-icon {
+    display: inline-block;
+    -webkit-mask: url('../icons/settings_phone.svg') no-repeat 50% 50%;
+    mask: url('../icons/settings_phone.svg') no-repeat 50% 50%;
+    mask-size: cover;
+}
+
+.icon-24 {
+    min-width: 24px;
+    width: 24px;
+    height: 24px;
+}

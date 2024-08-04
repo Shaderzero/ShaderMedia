@@ -1,0 +1,17 @@
+﻿@page "/logout"
+@attribute [Authorize]
+
+@using Common.Services.Interfaces
+@using Microsoft.AspNetCore.Authorization
+
+@code {
+    [Inject] public required NavigationManager NavigationManager { get; set; }
+
+    private readonly CancellationTokenSource _cts = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        NavigationManager.NavigateTo("/");
+    }
+
+}

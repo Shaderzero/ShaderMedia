@@ -1,0 +1,45 @@
+﻿@if (_book is not null)
+{
+    <div class="card">
+        @if (_book.Cover?.Data is not null)
+        {
+            <div class="img-col">
+                <img src="@CoverDataSrc()" class="rounded-start book-cover" alt="cover">
+            </div>
+        }
+        <div class="body-col">
+            <div class="card-body">
+                <h5 class="card-title">
+                    <div class="item-value">@_bookAuthors</div>
+                    <div class="item-value">@_book.Title</div>
+                </h5>
+                <div class="card-text">
+                    <div class="data-item">
+                        <div class="item-title">Описание</div>
+                        <div class="item-value">@((MarkupString)_book.Annotation)</div>
+                    </div>
+                    <div class="data-item">
+                        <div class="item-title">Серия</div>
+                        <div class="item-value">@_book.Series?.Name</div>
+                    </div>
+                    <div class="data-item">
+                        <div class="item-title">@_genreLabel</div>
+                        <div class="item-value">@_bookGenres</div>
+                    </div>
+                    <div class="data-item">
+                        <div class="item-title">Дата</div>
+                        <div class="item-value">@_book.Date</div>
+                    </div>
+                    <div class="data-item">
+                        <div class="item-title">Язык книги</div>
+                        <div class="item-value">@_book.Language?.Name</div>
+                    </div>
+                </div>
+                <div class="footer">
+                    <button class="btn btn-primary" @onclick="@Download">Скачать</button>
+                    <a href="reader/@(_book.Id)" class="btn btn-primary">Открыть</a>
+                </div>
+            </div>
+        </div>
+    </div>
+}

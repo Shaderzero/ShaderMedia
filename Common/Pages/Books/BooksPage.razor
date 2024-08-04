@@ -1,0 +1,107 @@
+﻿@page "/books"
+@using Common.ShaderComponents
+@using Common.Components
+@using Shared.Dictionaries
+@using Shared.Models.Books
+
+<h3>Библиотека</h3>
+
+<EditForm EditContext="@_editContext" OnValidSubmit="@HandleOnValidSubmitAsync">
+    <div class="top-box">
+        <div class="search-box">
+            <button class="btn btn-primary" @onclick="@HandleOnValidSubmitAsync">Искать</button>
+            <InputText class="form-control search-input" @bind-Value="@_bookRequest.SearchText"/>
+        </div>
+        <div>
+            <div class="checkbox-stack">
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1" @bind="@_bookRequest.SearchTitle">
+                    <label class="form-check-label" for="inlineCheckbox1">Название</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="inlineCheckbox2" @bind="@_bookRequest.SearchAuthor">
+                    <label class="form-check-label" for="inlineCheckbox2">Автор</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="inlineCheckbox3" @bind="@_bookRequest.SearchGenre">
+                    <label class="form-check-label" for="inlineCheckbox3">Жанр</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="inlineCheckbox4" @bind="@_bookRequest.SearchSeries">
+                    <label class="form-check-label" for="inlineCheckbox4">Серия</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="inlineCheckbox5" @bind="@_bookRequest.SearchKeyword">
+                    <label class="form-check-label" for="inlineCheckbox5">Ключевые слова</label>
+                </div>
+            </div>
+        </div>
+    </div>
+</EditForm>
+
+<div class="book-table">
+    <table class="table">
+        <tr class="table-row">
+            <th style="width: 32px;"></th>
+            <th style="width: 25%;">
+                <TableHeader Title="Название" SortDirection="@GetSortDirection(BookSortColumn.Title)" OnClickEvent="@(() => SetSortingAsync(BookSortColumn.Title))"></TableHeader>
+            </th>
+            <th style="width: 25%;">
+                <TableHeader Title="Автор" SortDirection="@GetSortDirection(BookSortColumn.Author)" OnClickEvent="@(() => SetSortingAsync(BookSortColumn.Author))"></TableHeader>
+            </th>
+            <th style="width: 20%;">
+                <TableHeader Title="Жанр" SortDirection="@GetSortDirection(BookSortColumn.Genre)" OnClickEvent="@(() => SetSortingAsync(BookSortColumn.Genre))"></TableHeader>
+            </th>
+            <th style="width: 20%;">
+                <TableHeader Title="Серия" SortDirection="@GetSortDirection(BookSortColumn.Series)" OnClickEvent="@(() => SetSortingAsync(BookSortColumn.Series))"></TableHeader>
+            </th>
+            <th style="width: 5%;">
+                <TableHeader Title="Дата" SortDirection="@GetSortDirection(BookSortColumn.Data)" OnClickEvent="@(() => SetSortingAsync(BookSortColumn.Data))"></TableHeader>
+            </th>
+            <th style="width: calc(5% - 32px);">
+                <TableHeader Title="Язык"></TableHeader>
+            </th>
+
+
+        </tr>
+        @if (_books?.Count > 0)
+        {
+            @foreach (var book in _books)
+            {
+                <tr class="table-row book" @onclick="@(() => SelectBook(book))">
+                    <td>
+                        @if (_selectedBook == book)
+                        {
+                            <i class="bi bi-dash"></i>
+                        }
+                        else
+                        {
+                            <i class="bi bi-plus"></i>
+                        }
+                    </td>
+                    <td class="table-item">@book.Title</td>
+                    <td class="table-item">
+                        @string.Join(", ", book.Authors.GenerateName())
+                    </td>
+                    <td class="table-item">
+                        @string.Join(", ", book.Genres.GenerateName())
+                    </td>
+                    <td class="table-item">@GenerateSeriesWithNumber(book)</td>
+                    <td class="table-item">@book.Date</td>
+                    <td class="table-item">@book.Language?.Name</td>
+                </tr>
+                @if (_selectedBook == book)
+                {
+                    <tr>
+                        <td colspan="7">
+                            <BookInfoComponent Book="_selectedBook" OnDownload="@DownloadBook" />
+                        </td>
+                    </tr>
+                }
+            }
+        }
+    </table>
+
+    <SPagination Pagination="@_bookRequest.Pagination" OnPageSelect="@GoPage"/>
+
+</div>

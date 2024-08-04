@@ -1,0 +1,9 @@
+﻿@page "/reader/{bookId:int}"
+@if (_book is not null)
+{
+    <div class="title">@_book.Title</div>
+}
+@if (!string.IsNullOrEmpty(_content))
+{
+    <div class="reader">@((MarkupString)_content)</div>
+}

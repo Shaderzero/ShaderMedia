@@ -1,0 +1,15 @@
+﻿<nav aria-label="page navigation">
+    <ul class="pagination">
+        <li class="page-item page-link" onclick="@(() => GoPage(_pagination.PageNumber - 1))">&laquo;</li>
+        @for (int i = 0; i < _pageNumbers.Length; i++)
+        {
+            var num = _pageNumbers[i];
+            <li class="page-item @GetActive(num) page-link" onclick="@(() => GoPage(num))">@num</li>
+            if (i < _pageNumbers.Length - 1 && _pageNumbers[i + 1] - num > 1)
+            {
+                <li class="page-item disabled page-link">...</li>
+            }
+        }
+        <li class="page-item page-link" onclick="@(() => GoPage(_pagination.PageNumber + 1))">&raquo;</li>
+    </ul>
+</nav>

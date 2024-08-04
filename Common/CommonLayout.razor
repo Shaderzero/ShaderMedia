@@ -1,0 +1,30 @@
+﻿@using Common.Layout
+@using Microsoft.AspNetCore.Components.Authorization
+@using Common.Pages.Identity
+
+<CascadingAuthenticationState>
+    <Router AppAssembly="@Anchor.Assembly" AdditionalAssemblies="new[] { typeof(MainLayout).Assembly }">
+        <Found Context="routeData">
+            <AuthorizeRouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)">
+                <NotAuthorized>
+                    @if (context.User.Identity?.IsAuthenticated != true)
+                    {
+                        <LoginRedirectComponent></LoginRedirectComponent>
+                    }
+                    else
+                    {
+                        <AccessDeniedComponent></AccessDeniedComponent>
+                    }
+                </NotAuthorized>
+                <Authorizing>
+                    <AuthorizingInProgressComponent></AuthorizingInProgressComponent>
+                </Authorizing>
+            </AuthorizeRouteView>
+        </Found>
+        <NotFound>
+            <LayoutView Layout="@typeof(MainLayout)">
+                <PageNotFoundComponent></PageNotFoundComponent>
+            </LayoutView>
+        </NotFound>
+    </Router>
+</CascadingAuthenticationState>

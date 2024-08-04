@@ -1,0 +1,15 @@
+﻿<div class="table-header @_sortable" style="@_width" @onclick="@ClickAsync">
+    @if (!string.IsNullOrEmpty(IconName))
+    {
+        <i class="@IconName"></i>
+    }
+    <div class="title">@Title</div>
+    @if (SortDirection == Shared.Dictionaries.SortDirection.Down)
+    {
+        <i class="bi bi-sort-down-alt"></i>
+    }
+    else if (SortDirection == Shared.Dictionaries.SortDirection.Up)
+    {
+        <i class="bi bi-sort-up"></i>
+    }
+</div>
