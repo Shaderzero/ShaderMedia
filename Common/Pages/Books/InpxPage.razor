@@ -4,3 +4,9 @@
 <div>
     <button @onclick="@InitInpxAsync">Extract</button>
 </div>
+@if (_error)
+{
+    <p>
+        Не надо сюда жать, фича не доделана
+    </p>
+}

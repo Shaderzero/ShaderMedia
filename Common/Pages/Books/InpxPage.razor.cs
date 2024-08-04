@@ -7,9 +7,11 @@ public partial class InpxPage
 {
     [Inject] public required IInpxService InpxService { get; set; }
     private readonly CancellationTokenSource _cts = new();
+    private bool _error;
 
     private async Task InitInpxAsync()
     {
-        var result = await InpxService.InitInpxAsync(_cts.Token);
+        _error = true;
+        // var result = await InpxService.InitInpxAsync(_cts.Token);
     }
 }
