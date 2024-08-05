@@ -17,6 +17,7 @@ var configuration = builder.Configuration;
 Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
 
 // Add services to the container.
+services.Configure<ApplicationSettings>(configuration.GetSection(nameof(ApplicationSettings)));
 var connectionString = configuration.GetConnectionString("PostgreSql");
 services.AddDbContext<AuthDbContext>(options => options.UseNpgsql(connectionString));
 services.AddDbContext<BookDbContext>(options => options.UseNpgsql(connectionString));

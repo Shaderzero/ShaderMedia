@@ -1,7 +1,9 @@
 ﻿using System.IO.Compression;
 using Api.Helpers;
 using Api.Services.Books.Interfaces;
+using Api.Utils;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 using Shared;
 using Shared.Models;
 using Shared.Models.Books;
@@ -10,9 +12,10 @@ using Shared.Utils;
 namespace Api.Controllers;
 
 [ApiController]
-public class BookController(IBookService bookService, MimeHelper mimeHelper, ILogger<BookController> logger) : ControllerBase
+public class BookController(IBookService bookService, MimeHelper mimeHelper, IOptionsMonitor<ApplicationSettings> options, ILogger<BookController> logger) : ControllerBase
 {
-    private const string LibraryPath = @"S:\Books\fb2.Flibusta.Net";
+    // private const string LibraryPath = @"S:\Books\fb2.Flibusta.Net";
+    private readonly string _libraryPath = options.CurrentValue.BooksPath;
     
     [HttpPost]
     [Route(ApiPaths.Books)]
@@ -30,7 +33,7 @@ public class BookController(IBookService bookService, MimeHelper mimeHelper, ILo
         if (book is null)
             return NotFound();
         
-        var archive = Path.Combine(LibraryPath, book.ZipName);
+        var archive = Path.Combine(_libraryPath, book.ZipName);
         var filename = $"{book.File}.{book.Ext}";
         
         var stream = GetBookFileFromArchive(archive, filename);
@@ -46,7 +49,7 @@ public class BookController(IBookService bookService, MimeHelper mimeHelper, ILo
         if (book is null)
             return NotFound();
         
-        var archive = Path.Combine(LibraryPath, book.ZipName);
+        var archive = Path.Combine(_libraryPath, book.ZipName);
         var filename = $"{book.File}.{book.Ext}";
         
         var stream = GetBookFileFromArchive(archive, filename);
